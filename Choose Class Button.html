@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Subject Button</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(to bottom,#6478e8,#7752b5);
+}
+
+.card{
+    width:90%;
+    max-width:380px;
+    height:90vh;
+    background:#fff;
+    border-radius:30px;
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:15px;
+    font-size:30px;
+    color:#222;
+}
+
+.class-list{
+    flex:1;
+    overflow-y:auto;
+    padding-right:5px;
+}
+
+.class-list::-webkit-scrollbar{
+    width:6px;
+}
+
+.class-list::-webkit-scrollbar-thumb{
+    background:#999;
+    border-radius:10px;
+}
+
+.class-btn{
+    display:block;
+    text-decoration:none;
+    background:#4CAF50;
+    color:#fff;
+    text-align:center;
+    padding:16px;
+    margin:10px 0;
+    border-radius:15px;
+    font-size:22px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.class-btn:hover{
+    background:#43a047;
+    transform:scale(1.02);
+}
+
+.back-btn{
+    display:block;
+    text-decoration:none;
+    background:#00aeff;
+    color:#fff;
+    text-align:center;
+    padding:14px;
+    border-radius:15px;
+    margin-top:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.back-btn:hover{
+    background:#ff000d;
+}
+
+</style>
+</head>
+<body>
+
+<div class="card">
+
+<h2>📚 Select Subject</h2>
+
+<div class="class-list">
+
+<a href="Bengali/Bengali.html" class="class-btn">Bengali</a>
+
+<a href="Geography/Geography.html" class="class-btn">Geography</a>
+
+<a href="History/History.html" class="class-btn">History</a>
+
+<a href="Life Science/Life Science.html" class="class-btn">Life Science</a>
+
+<a href="Physical Science/Physical Science.html" class="class-btn">Physical Science</a>
+
+<a href="General Knowledge/General Knowledge.html" class="class-btn">General Knowledge</a>
+
+<a href="General Science/General Science.html" class="class-btn">General Science</a>
+
+<a href="General Awareness/General Awareness.html" class="class-btn">General Awareness</a>
+
+<a href="PIN Password/Starting Animation.html" class="class-btn">More</a>
+
+</div>
+
+<a href="Open Library.html" class="back-btn">⮜ Back</a>
+
+</div>
+
+</body>
+</html>
