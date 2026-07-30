@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>General Science</title>
+
+        <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:Arial,sans-serif;
+            }
+
+            body{
+                background:linear-gradient(to bottom,#6478e8,#7752b5);
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+            }
+
+            .container{
+                width:90%;
+                max-width:380px;
+                height:85vh;
+                background:#fff;
+                border-radius:30px;
+                padding:25px;
+                box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+                display:flex;
+                flex-direction:column;
+            }
+
+            h1{
+                text-align:center;
+                color:#222;
+                margin-bottom:20px;
+                font-size:34px;
+            }
+
+            .subject-list{
+                flex:1;
+                overflow-y:auto;
+                padding-right:5px;
+                margin-top:15px;
+            }
+
+            .subject-list::-webkit-scrollbar{
+                width:6px;
+            }
+
+            .subject-list::-webkit-scrollbar-thumb{
+                background:#4CAF50;
+                border-radius:10px;
+            }
+
+            .subject-btn{
+                display:block;
+                width:100%;
+                text-decoration:none;
+                text-align:center;
+                background:#4CAF50;
+                color:#fff;
+                font-size:22px;
+                font-weight:bold;
+                padding:18px;
+                margin-bottom:15px;
+                border-radius:15px;
+                transition:.3s;
+            }
+
+            .subject-btn:hover{
+                background:#43a047;
+                transform:scale(1.02);
+            }
+
+            .back-btn{
+                display:block;
+                text-decoration:none;
+                background:#00aeff;
+                color:#fff;
+                text-align:center;
+                padding:14px;
+                border-radius:15px;
+                margin-top:15px;
+                font-size:22px;
+                font-weight:bold;
+            }
+
+            .back-btn:hover{
+                background:#ff03dd;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <h1>General Science</h1>
+
+            <div class="subject-list">
+
+                <a href="পদার্থবিদ্যা.html" class="subject-btn">পদার্থবিদ্যা</a>
+
+                <a href="রসায়ন.html" class="subject-btn">রসায়ন</a>
+
+                <a href="জীববিজ্ঞান.html" class="subject-btn">জীববিজ্ঞান</a>
+
+                <a href="কম্পিউটার সায়েন্স.html" class="subject-btn">কম্পিউটার সায়েন্স</a>
+
+                <a href="সায়েন্স টেকনোলজি & সায়েন্টিফিক রিসার্চ.html" class="subject-btn">সায়েন্স টেকনোলজি & সায়েন্টিফিক রিসার্চ</a>
+
+                <a href="পরিবেশ বিদ্যা.html" class="subject-btn">পরিবেশ বিদ্যা</a>
+
+            </div>
+
+            <a href="../Choose Class Button.html" class="back-btn">← Back</a>
+
+        </div>
+
+    </body>
+</html>
