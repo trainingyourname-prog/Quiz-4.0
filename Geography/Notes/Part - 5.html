@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+    <html lang="bn">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Geography Quiz</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <style>
+
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:'Poppins',sans-serif;
+            }
+
+            body{
+
+                height:100vh;
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                background:linear-gradient(180deg,#5F73F8,#7B4FC4);
+
+            }
+
+            .container{
+
+                width:95%;
+
+                max-width:420px;
+
+                background:#fff;
+
+                padding:35px 28px;
+
+                border-radius:28px;
+
+                text-align:center;
+
+                box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+                animation:fadeIn .5s;
+
+            }
+
+            @keyframes fadeIn{
+
+                from{
+
+                    opacity:0;
+                    transform:translateY(20px);
+
+                }
+
+                to{
+
+                    opacity:1;
+                    transform:translateY(0);
+
+                }
+
+            }
+
+            .logo{
+
+                width:90px;
+                height:90px;
+
+                margin:auto;
+
+                margin-bottom:18px;
+
+                border-radius:50%;
+
+                background:linear-gradient(180deg,#18B84B,#0F9E3D);
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                font-size:42px;
+
+                color:#fff;
+
+            }
+
+            h1{
+
+                font-size:30px;
+
+                font-weight:700;
+
+                color:#222;
+
+                margin-bottom:8px;
+
+            }
+
+            .subtitle{
+
+                font-size:16px;
+
+                color:#777;
+
+                margin-bottom:8px;
+
+            }
+
+            .info{
+
+                font-size:15px;
+
+                color:#18B84B;
+
+                font-weight:600;
+
+                margin-bottom:28px;
+
+            }
+
+            .start-btn{
+
+                width:100%;
+
+                padding:17px;
+
+                border:none;
+
+                border-radius:18px;
+
+                background:linear-gradient(90deg,#18B84B,#23CF59);
+
+                color:#fff;
+
+                font-size:22px;
+
+                font-weight:700;
+
+                cursor:pointer;
+
+                transition:.3s;
+
+                box-shadow:0 8px 18px rgba(0,0,0,.15);
+
+            }
+
+            .start-btn:hover{
+
+                transform:translateY(-2px);
+
+            }
+
+            .footer{
+
+                margin-top:20px;
+
+                font-size:13px;
+
+                color:#999;
+
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="logo">
+                📘
+            </div>
+
+            <h1>Quiz</h1>
+
+            <p class="subtitle">
+                Geography
+            </p>
+
+            <p class="info">
+            মোট ২৫টি প্রশ্ন
+            </p>
+
+            <button
+                class="start-btn"
+                onclick="startQuiz()">
+
+                ▶ Start Quiz
+
+            </button>
+
+            <div class="footer">
+
+                Powered by Quiz App
+
+            </div>
+
+        </div>
+
+        <script>
+
+            /* ==========================
+            Question List
+            ========================== */
+
+            const questions = [
+            
+                  {
+                    "q": "কোন রাজ্যের একটি শহরের নাম ‘গেহলগাম’?",
+                    "options": 
+                      "হিমাচল প্রদেশ",
+                      "জম্মু ও কাশ্মীর",
+                      "উত্তরাখণ্ড",
+                      "সিকিম"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "ভারত কোন পথের মাধ্যমে সবচেয়ে বেশি নির্ঘা/নির্যাস (?) বাণিজ্য করে থাকে?",
+                    "options": 
+                      "পানামা খাল",
+                      "সুয়েজ খাল",
+                      "কিল খাল",
+                      "মালাক্কা প্রণালী"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "ভারতের স্ট্যান্ডার্ড টাইম কোন শহরের স্থানীয় সময় অনুসারে গণনা করা হয়?",
+                    "options": 
+                      "দিল্লি",
+                      "কলকাতা",
+                      "এলাহাবাদ",
+                      "মুম্বাই"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "ভারতের সর্ববৃহৎ রাজ্যটি ভারতের সর্বক্ষুদ্র রাজ্য অপেক্ষা কত গুণ বড়?",
+                    "options": 
+                      "৫০ গুণ",
+                      "৭৫ গুণ",
+                      "৯০ গুণ",
+                      "১০০ গুণ"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "ভারতের কোন রাজ্যে সবচেয়ে বেশি নদী আছে?",
+                    "options": 
+                      "পশ্চিমবঙ্গ",
+                      "আসাম",
+                      "কেরালা",
+                      "বিহার"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "বাংলার ‘শিল্পভিত্তিতে’ জনসংখ্যা বৃদ্ধির কারণ কী?",
+                    "options": 
+                      "কৃষির উন্নতি",
+                      "ভালো সড়ক যোগাযোগ ব্যবস্থা",
+                      "নদীর প্রাচুর্য",
+                      "বনজ সম্পদ"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "কোন দেশে সবচেয়ে বেশি সংখ্যক স্ট্যান্ডার্ড সময় আছে?",
+                    "options": 
+                      "ভারত",
+                      "চীন",
+                      "রাশিয়া",
+                      "মার্কিন যুক্তরাষ্ট্র"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "যদি বায়ুমণ্ডল না থাকত তবে আকাশের রং কী হতো?",
+                    "options": 
+                      "নীল",
+                      "সাদা",
+                      "লাল",
+                      "কালো"
+                    ,
+                    "answer": 3
+                  },
+                  {
+                    "q": "কোন দেশে এককভাবে সবচেয়ে বড় বিমানবন্দরটি অবস্থিত?",
+                    "options": 
+                      "মার্কিন যুক্তরাষ্ট্র",
+                      "চীন",
+                      "সৌদি আরব",
+                      "রাশিয়া"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "কোন স্রোতের প্রভাবে জাপান উপকূল উষ্ণ থাকে?",
+                    "options": 
+                      "উষ্ণ কুরোসিও",
+                      "শীতল ক্যালিফোর্নিয়া",
+                      "উষ্ণ গালফ স্ট্রিম",
+                      "শীতল ল্যাব্রাডর"
+                    ,
+                    "answer": 0
+                  },
+                  {
+                    "q": "মৎস্যভাণ্ডার সৃষ্টি কোথায় হয়?",
+                    "options": 
+                      "উষ্ণ স্রোতের অঞ্চলে",
+                      "শীতল স্রোতের অঞ্চলে",
+                      "শীতল ও উষ্ণ স্রোতের মিলনস্থলে",
+                      "নদীর মোহনায়"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "গ্র্যান্ড ব্যাঙ্ক অঞ্চলটি কিসের জন্য বিখ্যাত?",
+                    "options": 
+                      "খনিজ তেলের জন্য",
+                      "বাণিজ্যিক মৎস্য চাষের জন্য",
+                      "তুলা চাষের জন্য",
+                      "জাহাজ নির্মাণের জন্য"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "লোয়ারভাটা খেলে এমন একটি নদীর নাম কী?",
+                    "options": 
+                      "গঙ্গা",
+                      "টেমস",
+                      "নীল",
+                      "আমাজন"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "শৈবাল সাগর কী?",
+                    "options": 
+                      "সমুদ্রের তলদেশে থাকা প্রবালপ্রাচীর",
+                      "উত্তর আটলান্টিক ও উত্তর প্রশান্ত মহাসাগরে অবস্থিত ভাসমান আগাছা ও শৈবালপূর্ণ বিস্তৃত স্রোতহীন জলভাগ",
+                      "নদীর মোহনায় তৈরি জলাভূমি",
+                      "সমুদ্রের উষ্ণ স্রোত"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "পৃথিবীর বৃহত্তম ও গভীরতম মহাসাগর কোনটি?",
+                    "options": 
+                      "আটলান্টিক মহাসাগর",
+                      "ভারত মহাসাগর",
+                      "প্রশান্ত মহাসাগর",
+                      "আর্কটিক মহাসাগর"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "বেঙ্গুয়েলা স্রোত কোথায় দেখা যায়?",
+                    "options": 
+                      "ভারত মহাসাগরে",
+                      "প্রশান্ত মহাসাগরে",
+                      "আটলান্টিক মহাসাগরে",
+                      "আর্কটিক মহাসাগরে"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "হিমশৈল কোথায় দেখা যায়?",
+                    "options": 
+                      "ভারত মহাসাগরে",
+                      "আটলান্টিক মহাসাগরে",
+                      "প্রশান্ত মহাসাগরে",
+                      "বঙ্গোপসাগরে"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "চাঁদের একবার পৃথিবী পরিক্রমণ করতে কত সময় লাগে?",
+                    "options": 
+                      "২৪ দিন",
+                      "২৭½ দিন",
+                      "৩০ দিন",
+                      "৩৬ দিন"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "ভূ-পৃষ্ঠের জলভাগের প্রতিটি স্থানে ২৪ ঘণ্টায় কতবার জোয়ার ও ভাটা হয়?",
+                    "options": 
+                      "একবার জোয়ার ও একবার ভাটা",
+                      "দু-বার জোয়ার ও দু-বার ভাটা",
+                      "তিনবার জোয়ার ও তিনবার ভাটা",
+                      "চারবার জোয়ার ও চারবার ভাটা"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "কার্পাস উৎপাদনে ভারতের স্থান কোথায়?",
+                    "options": 
+                      "তৃতীয়",
+                      "পঞ্চম",
+                      "সপ্তম",
+                      "দশম"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "মাহিন বাগটি ভারতের কোন রাজ্যে অবস্থিত?",
+                    "options": 
+                      "পশ্চিমবঙ্গ",
+                      "ঝাড়খণ্ড",
+                      "বিহার",
+                      "ওড়িশা"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "চামড়া শিল্পের সঙ্গে পশ্চিমবঙ্গের কোন অঞ্চলটি সংযুক্ত?",
+                    "options": 
+                      "হলদিয়া",
+                      "গার্ডেনরিচ",
+                      "দুর্গাপুর",
+                      "আসানসোল"
+                    ,
+                    "answer": 1
+                  },
+                  {
+                    "q": "পিপিলিতে কী জাতীয় শিল্প গড়ে উঠেছে?",
+                    "options": 
+                      "লৌহ-ইস্পাত শিল্প",
+                      "বস্ত্রশিল্প",
+                      "পেনসিলিন শিল্প",
+                      "কাগজ শিল্প"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "চলচ্চিত্র শিক্ষণ কেন্দ্র কোথায় গড়ে উঠেছে?",
+                    "options": 
+                      "কলকাতায়",
+                      "মুম্বাইয়ে",
+                      "পুনাতে",
+                      "দিল্লিতে"
+                    ,
+                    "answer": 2
+                  },
+                  {
+                    "q": "পৃথিবীর সর্ববৃহৎ সমভূমির নাম কী?",
+                    "options": 
+                      "গঙ্গা সমভূমি",
+                      "আমাজন সমভূমি",
+                      "সাইবেরিয়ান সমভূমি",
+                      "মিসিসিপি সমভূমি"
+                    ,
+                    "answer": 2
+                  }
+
+                
+            ];
+            
+            /* ==========================
+            START QUIZ FUNCTION
+            ========================== */
+
+            function startQuiz(){
+
+                /* Save Questions */
+
+                localStorage.setItem(
+                    "quizQuestions",
+                    JSON.stringify(questions)
+                );
+
+                /* Save Topic Name */
+
+                localStorage.setItem(
+                    "quizTitle",
+                    "Quiz"
+                );
+
+                /* Reset Previous Result */
+
+                localStorage.removeItem("quizScore");
+                localStorage.removeItem("quizWrong");
+                localStorage.removeItem("quizTime");
+
+                /* Open Quiz Page */
+
+                window.location.href =
+                "../../Quiz Page.html";
+
+            }
+
+            /* ==========================
+            PAGE LOAD ANIMATION
+            ========================== */
+
+            window.addEventListener("load",function(){
+
+                document.body.style.opacity="0";
+
+                document.body.style.transition=
+                "opacity .5s ease";
+
+                setTimeout(function(){
+
+                    document.body.style.opacity="1";
+
+                },100);
+
+            });
+
+            /* ==========================
+            BUTTON CLICK EFFECT
+            ========================== */
+
+            const btn=
+            document.querySelector(".start-btn");
+
+            btn.addEventListener("click",function(){
+
+                btn.style.transform="scale(.98)";
+
+                setTimeout(function(){
+
+                    btn.style.transform="scale(1)";
+
+                },120);
+
+            });
+
+            /* ==========================
+            END SCRIPT
+            ========================== */
+
+        </script>
+
+    </body>
+
+</html>
