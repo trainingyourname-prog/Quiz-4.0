@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+    <html lang="bn">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Geography Quiz</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <style>
+
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:'Poppins',sans-serif;
+            }
+
+            body{
+
+                height:100vh;
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                background:linear-gradient(180deg,#5F73F8,#7B4FC4);
+
+            }
+
+            .container{
+
+                width:95%;
+
+                max-width:420px;
+
+                background:#fff;
+
+                padding:35px 28px;
+
+                border-radius:28px;
+
+                text-align:center;
+
+                box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+                animation:fadeIn .5s;
+
+            }
+
+            @keyframes fadeIn{
+
+                from{
+
+                    opacity:0;
+                    transform:translateY(20px);
+
+                }
+
+                to{
+
+                    opacity:1;
+                    transform:translateY(0);
+
+                }
+
+            }
+
+            .logo{
+
+                width:90px;
+                height:90px;
+
+                margin:auto;
+
+                margin-bottom:18px;
+
+                border-radius:50%;
+
+                background:linear-gradient(180deg,#18B84B,#0F9E3D);
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                font-size:42px;
+
+                color:#fff;
+
+            }
+
+            h1{
+
+                font-size:30px;
+
+                font-weight:700;
+
+                color:#222;
+
+                margin-bottom:8px;
+
+            }
+
+            .subtitle{
+
+                font-size:16px;
+
+                color:#777;
+
+                margin-bottom:8px;
+
+            }
+
+            .info{
+
+                font-size:15px;
+
+                color:#18B84B;
+
+                font-weight:600;
+
+                margin-bottom:28px;
+
+            }
+
+            .start-btn{
+
+                width:100%;
+
+                padding:17px;
+
+                border:none;
+
+                border-radius:18px;
+
+                background:linear-gradient(90deg,#18B84B,#23CF59);
+
+                color:#fff;
+
+                font-size:22px;
+
+                font-weight:700;
+
+                cursor:pointer;
+
+                transition:.3s;
+
+                box-shadow:0 8px 18px rgba(0,0,0,.15);
+
+            }
+
+            .start-btn:hover{
+
+                transform:translateY(-2px);
+
+            }
+
+            .footer{
+
+                margin-top:20px;
+
+                font-size:13px;
+
+                color:#999;
+
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="logo">
+                📘
+            </div>
+
+            <h1>Quiz</h1>
+
+            <p class="subtitle">
+                Geography
+            </p>
+
+            <p class="info">
+            মোট ২৫টি প্রশ্ন
+            </p>
+
+            <button
+                class="start-btn"
+                onclick="startQuiz()">
+
+                ▶ Start Quiz
+
+            </button>
+
+            <div class="footer">
+
+                Powered by Quiz App
+
+            </div>
+
+        </div>
+
+        <script>
+
+            /* ==========================
+            Question List
+            ========================== */
+
+            const questions = [
+            
+              {
+                "q":"বঙ্গোপসাগরের অন্তর্গত কতটি দ্বীপ আছে?",
+                "options":[
+                  "১০৪টি",
+                  "২০৪টি",
+                  "৩০৪টি",
+                  "৪০৪টি"
+                ],
+                "answer":1
+              },
+              {
+                "q":"সিয়াচেন হিমবাহ কোথায় অবস্থিত?",
+                "options":[
+                  "নুব্রা উপত্যকা (কারাকোরাম)",
+                  "কাশ্মীর উপত্যকা",
+                  "গঙ্গোত্রী",
+                  "লাদাখের জাস্কার"
+                ],
+                "answer":0
+              },
+              {
+                "q":"সুয়েজ খালটি কোথায় অবস্থিত?",
+                "options":[
+                  "তুরস্কে",
+                  "ইজিপ্টে",
+                  "ইরানে",
+                  "ইরাকে"
+                ],
+                "answer":1
+              },
+              {
+                "q":"Solar System-এর আবিষ্কারক কে?",
+                "options":[
+                  "গ্যালিলিও",
+                  "নিউটন",
+                  "কোপার্নিকাস",
+                  "কেপলার"
+                ],
+                "answer":2
+              },
+              {
+                "q":"বিশ্বে প্রথম মহাশূন্যে হেঁটেছিলেন কে?",
+                "options":[
+                  "ইউরি গ্যাগারিন",
+                  "অ্যালেক্সি লিওনভ",
+                  "নীল আর্মস্ট্রং",
+                  "জন গ্লেন"
+                ],
+                "answer":1
+              },
+              {
+                "q":"পৃথিবীর শীতলতম স্থান কোনটি?",
+                "options":[
+                  "গ্রিনল্যান্ড",
+                  "সাইবেরিয়া (ভারখয়ানস্ক)",
+                  "আলাস্কা",
+                  "অ্যান্টার্কটিকা"
+                ],
+                "answer":1
+              },
+              {
+                "q":"ভারতবর্ষে মোট কতটি দ্বীপ আছে?",
+                "options":[
+                  "১৪৭টি",
+                  "২০৪টি",
+                  "২৪৭টি",
+                  "৩৪৭টি"
+                ],
+                "answer":2
+              },
+              {
+                "q":"পৃথিবীর উচ্চতম ভবন কোনটি?",
+                "options":[
+                  "সাংহাই টাওয়ার",
+                  "বুর্জ খলিফা",
+                  "মেরদেকা 118",
+                  "এম্পায়ার স্টেট বিল্ডিং"
+                ],
+                "answer":1
+              },
+              {
+                "q":"২০১১ সালের আদমসুমারি অনুযায়ী, ভারতের সবচেয়ে গরিব রাজ্য কোনটি?",
+                "options":[
+                  "বিহার",
+                  "ঝাড়খণ্ড",
+                  "ছত্তিশগড়",
+                  "ওড়িশা"
+                ],
+                "answer":2
+              },
+              {
+                "q":"পূর্বঘাট পর্বতের অপর নাম কী?",
+                "options":[
+                  "সহ্যাদ্রি",
+                  "মালয়াদ্রি",
+                  "নীলগিরি",
+                  "আরাবল্লী"
+                ],
+                "answer":1
+              },
+              {
+                "q":"আয়তনে বা জনসংখ্যায় বিশ্বের ক্ষুদ্রতম দেশ কী?",
+                "options":[
+                  "মোনাকো",
+                  "মালদ্বীপ",
+                  "ভ্যাটিকান সিটি",
+                  "সান মারিনো"
+                ],
+                "answer":2
+              },
+              {
+                "q":"কোন শহরকে ‘নীরব শহর’ বলা হয়?",
+                "options":[
+                  "রোম",
+                  "প্যারিস",
+                  "লন্ডন",
+                  "ভিয়েনা"
+                ],
+                "answer":0
+              },
+              {
+                "q":"পূর্বঘাট পাহাড়ের অপর নাম কী?",
+                "options":[
+                  "মহেন্দ্রগিরি",
+                  "সহ্যাদ্রি",
+                  "নীলগিরি",
+                  "সাতপুরা"
+                ],
+                "answer":0
+              },
+              {
+                "q":"পশ্চিম পাহাড়ের অপর নাম কী?",
+                "options":[
+                  "মহেন্দ্রগিরি",
+                  "সহ্যাদ্রি পর্বত",
+                  "মালয়াদ্রি",
+                  "নীলগিরি"
+                ],
+                "answer":1
+              },
+              {
+                "q":"নীলগিরি পর্বত অঞ্চলের আদিবাসীদের কী বলে?",
+                "options":[
+                  "ভীল",
+                  "টোডা",
+                  "গোন্ড",
+                  "সাঁওতাল"
+                ],
+                "answer":1
+              },
+              {
+                "q":"রাজস্থানের সমান্তরাল বালিয়াড়ির মধ্যবর্তী লম্বা হ্রদকে কী বলা হয়?",
+                "options":[
+                  "ধান্দ",
+                  "তাল",
+                  "সরোবর",
+                  "ডান্ডি"
+                ],
+                "answer":0
+              },
+              {
+                "q":"তুঙ্গভদ্র বাঁধ প্রকল্পটি কোন রাজ্যে আছে?",
+                "options":[
+                  "তামিলনাড়ু",
+                  "অন্ধ্রপ্রদেশ",
+                  "কর্ণাটক",
+                  "মহারাষ্ট্র"
+                ],
+                "answer":2
+              },
+              {
+                "q":"ক্রান্তীয় চিরহরিৎ অরণ্য কোন রাজ্যে নেই?",
+                "options":[
+                  "কেরালা",
+                  "অসম",
+                  "হিমাচল প্রদেশ",
+                  "কর্ণাটক"
+                ],
+                "answer":2
+              },
+              {
+                "q":"পশ্চিমঘাট পর্বতমালার সর্বোচ্চ শৃঙ্গ কোনটি?",
+                "options":[
+                  "আনাইমুড়ি",
+                  "দোদাবেট্টা",
+                  "মহেন্দ্রগিরি",
+                  "কোদাইকানাল"
+                ],
+                "answer":0
+              },
+              {
+                "q":"ভারতের কেশ গবেষণা পরীক্ষার কেন্দ্রটি কোন উপকূলে আছে?",
+                "options":[
+                  "পশ্চিম উপকূলে",
+                  "পূর্ব উপকূলে",
+                  "উত্তর উপকূলে",
+                  "দক্ষিণ-পশ্চিম উপকূলে"
+                ],
+                "answer":1
+              },
+              {
+                "q":"পশ্চিমবঙ্গের কোন জেলার একটি অঞ্চল ‘দিয়ারা’ নামে পরিচিত?",
+                "options":[
+                  "মালদহ",
+                  "নদিয়া",
+                  "মুর্শিদাবাদ",
+                  "বীরভূম"
+                ],
+                "answer":0
+              },
+              {
+                "q":"সুবর্ণরেখা ও ধনসিরি কোন নদীর উপনদী?",
+                "options":[
+                  "গঙ্গা",
+                  "ব্রহ্মপুত্র",
+                  "গোদাবরী",
+                  "মহানদী"
+                ],
+                "answer":1
+              },
+              {
+                "q":"হর মন্দির কে প্রতিষ্ঠা করেন?",
+                "options":[
+                  "গুরু নানক",
+                  "গুরু অর্জন",
+                  "গুরু গোবিন্দ সিং",
+                  "গুরু তেগবাহাদুর"
+                ],
+                "answer":1
+              },
+              {
+                "q":"পাগার তলন টাওয়ারের উপনদী কোনটি?",
+                "options":[
+                  "শোন",
+                  "যমুনা",
+                  "তিস্তা",
+                  "কোসি"
+                ],
+                "answer":0
+              },
+              {
+                "q":"প্যাংগং হ্রদ আছে কোথায়?",
+                "options":[
+                  "সিকিম",
+                  "লাদাখ",
+                  "হিমাচল প্রদেশ",
+                  "উত্তরাখণ্ড"
+                ],
+                "answer":1
+              }
+
+                
+            ];
+            
+            /* ==========================
+            START QUIZ FUNCTION
+            ========================== */
+
+            function startQuiz(){
+
+                /* Save Questions */
+
+                localStorage.setItem(
+                    "quizQuestions",
+                    JSON.stringify(questions)
+                );
+
+                /* Save Topic Name */
+
+                localStorage.setItem(
+                    "quizTitle",
+                    "Quiz"
+                );
+
+                /* Reset Previous Result */
+
+                localStorage.removeItem("quizScore");
+                localStorage.removeItem("quizWrong");
+                localStorage.removeItem("quizTime");
+
+                /* Open Quiz Page */
+
+                window.location.href =
+                "../../Quiz Page.html";
+
+            }
+
+            /* ==========================
+            PAGE LOAD ANIMATION
+            ========================== */
+
+            window.addEventListener("load",function(){
+
+                document.body.style.opacity="0";
+
+                document.body.style.transition=
+                "opacity .5s ease";
+
+                setTimeout(function(){
+
+                    document.body.style.opacity="1";
+
+                },100);
+
+            });
+
+            /* ==========================
+            BUTTON CLICK EFFECT
+            ========================== */
+
+            const btn=
+            document.querySelector(".start-btn");
+
+            btn.addEventListener("click",function(){
+
+                btn.style.transform="scale(.98)";
+
+                setTimeout(function(){
+
+                    btn.style.transform="scale(1)";
+
+                },120);
+
+            });
+
+            /* ==========================
+            END SCRIPT
+            ========================== */
+
+        </script>
+
+    </body>
+
+</html>
