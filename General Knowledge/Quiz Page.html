@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+    <html lang="bn">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+        <title>Professional Quiz App</title>
+
+        <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+        <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+        <style>
+
+            /* ===========================
+            RESET
+            =========================== */
+
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:'Poppins',sans-serif;
+            }
+
+            body{
+
+                height:100vh;
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                background:linear-gradient(180deg,#6278F8,#7A4FC3);
+
+                overflow:hidden;
+
+            }
+
+            /* ===========================
+            MAIN CONTAINER
+            =========================== */
+
+            .container{
+
+                width:95%;
+
+                max-width:430px;
+
+                height:96vh;
+
+                background:#fff;
+
+                border-radius:28px;
+
+                padding:18px;
+
+                display:flex;
+
+                flex-direction:column;
+
+                box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+                overflow:hidden;
+
+            }
+
+            /* ===========================
+            HEADER
+            =========================== */
+
+            .header{
+
+                text-align:center;
+
+                margin-bottom:18px;
+
+            }
+
+            .header h1{
+
+                font-size:28px;
+
+                font-weight:700;
+
+                color:#222;
+
+            }
+
+            .subtitle{
+
+                margin-top:5px;
+
+                font-size:15px;
+
+                font-weight:500;
+
+                color:#888;
+
+            }
+
+            /* ===========================
+            TOP BAR
+            =========================== */
+
+            .top-bar{
+
+                display:flex;
+
+                justify-content:space-between;
+
+                align-items:center;
+
+                margin-bottom:18px;
+
+            }
+
+            /* ===========================
+            TIMER
+            =========================== */
+
+            .timer-box{
+
+                display:flex;
+
+                align-items:center;
+
+                gap:12px;
+
+            }
+
+            .timer-circle{
+
+                width:60px;
+
+                height:60px;
+
+                border-radius:50%;
+
+                background:linear-gradient(180deg,#18B84B,#11953C);
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                color:#fff;
+
+                font-size:22px;
+
+                font-weight:700;
+
+                box-shadow:0 8px 18px rgba(0,0,0,.18);
+
+            }
+
+            .timer-text{
+
+                display:flex;
+
+                flex-direction:column;
+
+            }
+
+            .timer-text div:first-child{
+
+                font-size:13px;
+
+                color:#666;
+
+            }
+
+            .timer-text div:last-child{
+
+                font-size:16px;
+
+                font-weight:600;
+
+                color:#222;
+
+            }
+
+            /* ===========================
+            AUTO NEXT
+            =========================== */
+
+            .auto-next{
+
+                display:flex;
+
+                flex-direction:column;
+
+                align-items:center;
+
+                gap:6px;
+
+                font-size:13px;
+
+                font-weight:600;
+
+                color:#555;
+
+            }
+
+            .switch{
+
+                position:relative;
+
+                display:inline-block;
+
+                width:52px;
+
+                height:28px;
+
+            }
+
+            .switch input{
+
+                display:none;
+
+            }
+
+            .slider{
+
+                position:absolute;
+
+                top:0;
+                left:0;
+                right:0;
+                bottom:0;
+
+                background:#ccc;
+
+                border-radius:30px;
+
+                cursor:pointer;
+
+                transition:.3s;
+
+            }
+
+            .slider:before{
+
+                content:"";
+
+                position:absolute;
+
+                width:22px;
+
+                height:22px;
+
+                left:3px;
+
+                bottom:3px;
+
+                background:#fff;
+
+                border-radius:50%;
+
+                transition:.3s;
+
+            }
+
+            .switch input:checked + .slider{
+
+                background:#18B84B;
+
+            }
+
+            .switch input:checked + .slider:before{
+
+                transform:translateX(24px);
+
+            }
+
+            /* ===========================
+            PROGRESS BAR
+            =========================== */
+
+            .progress-area{
+
+                margin-bottom:18px;
+
+            }
+
+            .progress-info{
+
+                display:flex;
+
+                justify-content:space-between;
+
+                align-items:center;
+
+                font-size:14px;
+
+                font-weight:600;
+
+                color:#444;
+
+                margin-bottom:8px;
+
+            }
+
+            .progress{
+
+                width:100%;
+
+                height:10px;
+
+                background:#EAEAEA;
+
+                border-radius:30px;
+
+                overflow:hidden;
+
+            }
+
+            .progress-bar{
+
+                width:0%;
+
+                height:100%;
+
+                background:linear-gradient(90deg,#18B84B,#39D96D);
+
+                transition:.4s;
+
+            }
+
+            /* ===========================
+            QUIZ AREA
+            =========================== */
+
+            .quiz-area{
+
+                flex:1;
+
+                overflow-y:auto;
+
+                padding-right:5px;
+
+                scroll-behavior:smooth;
+
+            }
+
+            .quiz-area::-webkit-scrollbar{
+
+                width:5px;
+
+            }
+
+            .quiz-area::-webkit-scrollbar-thumb{
+
+                background:#18B84B;
+
+                border-radius:20px;
+
+            }
+
+            /* ===========================
+            QUESTION CARD
+            =========================== */
+
+            .question-card{
+
+                background:#fff;
+
+                border:2px solid #F2F2F2;
+
+                border-radius:20px;
+
+                padding:20px;
+
+                box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+            }
+
+            .question{
+
+                font-size:22px;
+
+                font-weight:700;
+
+                line-height:1.6;
+
+                color:#222;
+
+                margin-bottom:20px;
+
+            }
+
+            /* ===========================
+            OPTIONS
+            =========================== */
+
+            .options{
+
+                display:flex;
+
+                flex-direction:column;
+
+                gap:12px;
+
+            }
+
+            .option{
+
+                width:100%;
+
+                padding:15px 18px;
+
+                border:none;
+
+                outline:none;
+
+                background:#F7F8FC;
+
+                border:2px solid #E5E5E5;
+
+                border-radius:16px;
+
+                font-size:16px;
+
+                font-weight:600;
+
+                text-align:left;
+
+                cursor:pointer;
+
+                transition:.25s;
+
+            }
+
+            .option:hover{
+
+                background:#EEF2FF;
+
+                border-color:#6278F8;
+
+            }
+
+            .option.correct{
+
+                background:#18B84B;
+
+                border-color:#18B84B;
+
+                color:#fff;
+
+            }
+
+            .option.wrong{
+
+                background:#F44336;
+
+                border-color:#F44336;
+
+                color:#fff;
+
+            }
+
+            .option:disabled{
+
+                cursor:not-allowed;
+
+                opacity:.95;
+
+            }
+
+            /* ===========================
+            BACK BUTTON
+            =========================== */
+
+            .bottom-bar{
+
+                margin-top:18px;
+
+            }
+
+            .back-btn{
+
+                display:block;
+
+                width:100%;
+
+                text-align:center;
+
+                text-decoration:none;
+
+                padding:15px;
+
+                border-radius:18px;
+
+                background:linear-gradient(90deg,#6278F8,#7A4FC3);
+
+                color:#fff;
+
+                font-size:18px;
+
+                font-weight:700;
+
+                transition:.3s;
+
+            }
+
+            .back-btn:hover{
+
+                transform:translateY(-2px);
+
+            }
+
+            /* ===========================
+            RESULT PAGE
+            =========================== */
+
+            .result-page{
+
+                display:none;
+
+                text-align:center;
+
+                padding:10px;
+
+            }
+
+            .result-page h1{
+
+                font-size:30px;
+
+                color:#18B84B;
+
+                margin-bottom:20px;
+
+            }
+
+            .result-card{
+
+                background:#F7F8FC;
+
+                border-radius:20px;
+
+                padding:20px;
+
+                box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+            }
+
+            .result-card p{
+
+                font-size:18px;
+
+                font-weight:600;
+
+                margin:12px 0;
+
+                color:#333;
+
+            }
+
+            #grade{
+
+                font-size:34px;
+
+                font-weight:700;
+
+                color:#18B84B;
+
+                margin-top:15px;
+
+            }
+
+            .restart-btn{
+
+                margin-top:18px;
+
+                width:100%;
+
+                padding:16px;
+
+                border:none;
+
+                border-radius:18px;
+
+                background:linear-gradient(90deg,#18B84B,#28D05F);
+
+                color:#fff;
+
+                font-size:19px;
+
+                font-weight:700;
+
+                cursor:pointer;
+
+                transition:.3s;
+
+            }
+
+            .restart-btn:hover{
+
+                transform:translateY(-2px);
+
+            }
+
+            /* ===========================
+            MOBILE
+            =========================== */
+
+            @media(max-width:480px){
+
+                .container{
+
+                    width:96%;
+
+                    height:97vh;
+
+                    padding:16px;
+
+                }
+
+                .header h1{
+
+                    font-size:25px;
+
+                }
+
+                .question{
+
+                    font-size:20px;
+
+                }
+
+                .option{
+
+                    font-size:15px;
+
+                }
+
+                .timer-circle{
+
+                    width:56px;
+
+                    height:56px;
+
+                    font-size:20px;
+
+                }
+
+            }
+
+            /* ===========================
+            RESULT BACK BUTTON
+            =========================== */
+
+            .result-back-btn{
+
+                display:block;
+
+                width:100%;
+
+                margin-top:15px;
+
+                padding:16px;
+
+                text-align:center;
+
+                text-decoration:none;
+
+                border-radius:18px;
+
+                background:linear-gradient(90deg,#6278F8,#7A4FC3);
+
+                color:#fff;
+
+                font-size:20px;
+
+                font-weight:700;
+
+                transition:.3s;
+
+                box-shadow:0 8px 18px rgba(0,0,0,.18);
+
+            }
+
+            .result-back-btn:hover{
+
+                transform:translateY(-2px);
+
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <!-- ================= HEADER ================= -->
+
+            <div class="header">
+
+                <h1 id="topicTitle">Quiz</h1>
+
+                <p class="subtitle">
+                    Tap the Correct Answer
+                </p>
+
+            </div>
+
+            <!-- ================= TOP BAR ================= -->
+
+            <div class="top-bar">
+
+                <!-- Timer -->
+
+                <div class="timer-box">
+
+                    <div class="timer-circle">
+
+                        <span id="time">30</span>
+
+                    </div>
+
+                    <div class="timer-text">
+
+                        <div>Time Left</div>
+
+                        <div id="timerStatus">Running...</div>
+
+                    </div>
+
+                </div>
+
+                <!-- Auto Next -->
+
+                <div class="auto-next">
+
+                    <label>Auto Next</label>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="autoNext"
+                            checked>
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+            <!-- ================= PROGRESS ================= -->
+
+            <div class="progress-area">
+
+                <div class="progress-info">
+
+                    <span id="questionNumber">
+                        Question 1 / 1
+                    </span>
+
+                    <span id="scoreText">
+                        Score : 0
+                    </span>
+
+                </div>
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar"
+                        id="progressBar">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= QUIZ AREA ================= -->
+
+            <div
+                class="quiz-area"
+                id="quizArea">
+
+                <div class="question-card">
+
+                    <h2
+                        class="question"
+                        id="questionText">
+
+                        Loading Question...
+
+                    </h2>
+
+                    <div class="options">
+
+                        <button
+                            class="option"
+                            onclick="selectAnswer(0)">
+                            Option A
+                        </button>
+
+                        <button
+                            class="option"
+                            onclick="selectAnswer(1)">
+                            Option B
+                        </button>
+
+                        <button
+                            class="option"
+                            onclick="selectAnswer(2)">
+                            Option C
+                        </button>
+
+                        <button
+                            class="option"
+                            onclick="selectAnswer(3)">
+                            Option D
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ================= BACK BUTTON ================= -->
+
+            <div class="bottom-bar">
+
+                <a
+                    href="General Knowledge.html" class="back-btn">
+                    ← Back
+                </a>
+
+            </div>
+
+            <!-- ================= RESULT PAGE ================= -->
+
+            <div
+                class="result-page"
+                id="resultPage">
+
+                <h1>
+                    Quiz Finished
+                </h1>
+
+                <div class="result-card">
+
+                    <p>
+                        📚 Total Questions :
+                        <span id="totalQ">0</span>
+                    </p>
+
+                    <p>
+                        ✅ Correct :
+                        <span id="correctQ">0</span>
+                    </p>
+
+                    <p>
+                        ❌ Wrong :
+                        <span id="wrongQ">0</span>
+                    </p>
+
+                    <p>
+                        📊 Percentage :
+                        <span id="percent">0%</span>
+                    </p>
+
+                    <p>
+                        Time Taken :
+                        <span id="totalTime">0 sec</span>
+                    </p>
+
+                    <h2 id="grade">
+                        A+
+                    </h2>
+
+                    <button
+                        class="restart-btn"
+                        onclick="location.reload()">
+
+                        Restart Quiz
+
+                    </button>
+
+                    <a href="General Knowledge.html" class="result-back-btn">
+                    ← Back
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <script>
+
+            /* ===========================
+            QUIZ VARIABLES
+            =========================== */
+
+            let questions = [];
+
+            let currentQuestion = 0;
+
+            let score = 0;
+
+            let wrong = 0;
+
+            let answered = false;
+
+            let timer = null;
+
+            let timeLeft = 30;
+
+            let totalTime = 0;
+
+            /* ===========================
+            LOAD QUESTIONS
+            =========================== */
+
+            const storedQuestions =
+            localStorage.getItem("quizQuestions");
+
+            if(!storedQuestions){
+
+            alert("Question Data Not Found!");
+
+            window.location.href =
+            "Choose Subject.html";
+
+            }
+
+            questions =
+            JSON.parse(storedQuestions);
+
+            /* ===========================
+            LOAD TOPIC TITLE
+            =========================== */
+
+            const quizTitle =
+            localStorage.getItem("quizTitle");
+
+            document.getElementById("topicTitle").innerHTML =
+            quizTitle || "Quiz";
+
+            /* ===========================
+            AUTO NEXT
+            =========================== */
+
+            document.getElementById("autoNext").checked = true;
+
+            /* ===========================
+            LOAD FIRST QUESTION
+            =========================== */
+
+            loadQuestion();
+
+            /* ===========================
+            LOAD QUESTION
+            =========================== */
+
+            function loadQuestion(){
+
+                answered = false;
+
+                clearInterval(timer);
+
+                timeLeft = 30;
+
+                const q =
+                questions[currentQuestion];
+
+                /* Question Number */
+
+                document.getElementById("questionNumber").innerHTML =
+
+                "Question " +
+                (currentQuestion + 1) +
+                " / " +
+                questions.length;
+
+                /* Score */
+
+                document.getElementById("scoreText").innerHTML =
+
+                "Score : " + score;
+
+                /* Question */
+
+                document.getElementById("questionText").innerHTML =
+                q.q;
+
+                /* Options */
+
+                const options =
+                document.querySelectorAll(".option");
+
+                options.forEach(function(btn,index){
+
+                btn.disabled = false;
+
+                btn.className = "option";
+
+                btn.innerHTML =
+
+                String.fromCharCode(65+index) +
+
+                ". " +
+
+                q.options[index];
+
+                });
+
+                /* Progress */
+
+                document.getElementById("progressBar").style.width =
+
+                ((currentQuestion+1)
+
+                /questions.length)
+
+                *100
+
+                + "%";
+
+                /* Start Timer */
+
+                startTimer();
+
+            }
+
+            /* ===========================
+            TIMER
+            =========================== */
+
+            function startTimer(){
+
+                clearInterval(timer);
+
+                timeLeft = 30;
+
+                document.getElementById("time").innerHTML = timeLeft;
+
+                document.getElementById("timerStatus").innerHTML =
+                "Running...";
+
+                timer = setInterval(function(){
+
+                    timeLeft--;
+
+                    totalTime++;
+
+                    document.getElementById("time").innerHTML =
+                    timeLeft;
+
+                    /* Last 5 Seconds */
+
+                    if(timeLeft<=5){
+
+                        document.querySelector(".timer-circle").style.background =
+                        "linear-gradient(180deg,#FF9800,#F44336)";
+
+                    }else{
+
+                        document.querySelector(".timer-circle").style.background =
+                        "linear-gradient(180deg,#18B84B,#11953C)";
+
+                    }
+
+                    if(timeLeft<=0){
+
+                        clearInterval(timer);
+
+                        document.getElementById("timerStatus").innerHTML =
+                        "Time Up";
+
+                        selectAnswer(-1);
+
+                    }
+
+                },1000);
+
+            }
+
+            /* ===========================
+            CHECK ANSWER
+            =========================== */
+
+            function selectAnswer(selectedIndex){
+
+                if(answered) return;
+
+                answered = true;
+
+                clearInterval(timer);
+
+                document.getElementById("timerStatus").innerHTML =
+                "Answered";
+
+                const correctIndex =
+                questions[currentQuestion].answer;
+
+                const options =
+                document.querySelectorAll(".option");
+
+                /* Disable All Buttons */
+
+                options.forEach(function(btn){
+
+                    btn.disabled = true;
+
+                });
+
+                /* Correct Answer */
+
+                options[correctIndex]
+                .classList.add("correct");
+
+                /* User Answer */
+
+                if(selectedIndex==correctIndex){
+
+                    score++;
+
+                }
+                
+                else{
+
+                    wrong++;
+
+                    if(selectedIndex!=-1){
+
+                        options[selectedIndex]
+                        .classList.add("wrong");
+
+                    }
+
+                }
+
+                /* Score */
+
+                document.getElementById("scoreText").innerHTML =
+
+                "Score : " + score;
+
+                /* Auto Next */
+
+                if(document.getElementById("autoNext").checked){
+
+                    setTimeout(function(){
+
+                        nextQuestion();
+
+                    },1000);
+
+                }
+                
+                else{
+
+                    showContinueButton();
+
+                }
+
+            }
+
+            /* ===========================
+            CONTINUE BUTTON
+            =========================== */
+
+            function showContinueButton(){
+
+                let btn =
+                document.getElementById("continueBtn");
+
+                if(btn){
+
+                    btn.style.display="block";
+                    return;
+
+                }
+
+                btn=document.createElement("button");
+
+                btn.id="continueBtn";
+
+                btn.innerHTML="Continue ➜";
+
+                btn.style.width="100%";
+                btn.style.marginTop="15px";
+                btn.style.padding="15px";
+                btn.style.border="none";
+                btn.style.borderRadius="18px";
+                btn.style.background=
+                "linear-gradient(90deg,#18B84B,#28D05F)";
+                btn.style.color="#fff";
+                btn.style.fontSize="18px";
+                btn.style.fontWeight="700";
+                btn.style.cursor="pointer";
+
+                btn.onclick=function(){
+
+                    btn.remove();
+
+                    nextQuestion();
+
+                };
+
+                document.querySelector(".bottom-bar")
+                .prepend(btn);
+
+            }
+
+            /* ===========================
+            NEXT QUESTION
+            =========================== */
+
+            function nextQuestion(){
+
+                currentQuestion++;
+
+                if(currentQuestion < questions.length){
+
+                    loadQuestion();
+
+                }
+
+                else{
+
+                    showResult();
+
+                }
+
+            }
+
+            /* ===========================
+            RESULT PAGE
+            =========================== */
+
+            function showResult(){
+
+                clearInterval(timer);
+
+                /* Hide Quiz */
+
+                document.querySelector(".header")
+                .style.display="none";
+
+                document.querySelector(".top-bar")
+                .style.display="none";
+
+                document.querySelector(".progress-area")
+                .style.display="none";
+
+                document.querySelector(".quiz-area")
+                .style.display="none";
+
+                document.querySelector(".bottom-bar")
+                .style.display="none";
+
+                /* Show Result */
+
+                document.getElementById("resultPage")
+                .style.display="block";
+
+                /* Report */
+
+                document.getElementById("totalQ")
+                .innerHTML=questions.length;
+
+                document.getElementById("correctQ")
+                .innerHTML=score;
+
+                document.getElementById("wrongQ")
+                .innerHTML=wrong;
+
+                const percent=
+                Math.round((score/questions.length)*100);
+
+                document.getElementById("percent")
+                .innerHTML=percent+"%";
+
+                document.getElementById("totalTime")
+                .innerHTML=totalTime+" Sec";
+
+                /* Grade */
+
+                let grade="Fail";
+
+                if(percent>=90){
+
+                    grade="🏆 A+";
+
+                }
+
+                else if(percent>=80){
+
+                    grade="🥇 A";
+
+                }
+
+                else if(percent>=70){
+
+                    grade="🥈 B";
+
+                }
+
+                else if(percent>=60){
+
+                    grade="🥉 C";
+
+                }
+
+                else if(percent>=40){
+
+                    grade="📘 D";
+
+                }
+
+                document.getElementById("grade")
+                .innerHTML=grade;
+
+            }
+
+            /* ===========================
+            PAGE ANIMATION
+            =========================== */
+
+            window.addEventListener("load",function(){
+
+                document.body.style.opacity="0";
+
+                document.body.style.transition=
+                "opacity .5s";
+
+                setTimeout(function(){
+
+                document.body.style.opacity="1";
+
+                },100);
+
+            });
+
+            /* ===========================
+            DISABLE DOUBLE CLICK
+            =========================== */
+
+            document.addEventListener(
+                "dblclick",
+                function(e){
+
+                e.preventDefault();
+
+            });
+
+        </script>
+
+    </body>
+
+</html>

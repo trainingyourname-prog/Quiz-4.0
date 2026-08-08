@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+    <html lang="bn">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Bangla Quiz</title>
+
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <style>
+
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                font-family:'Poppins',sans-serif;
+            }
+
+            body{
+
+                height:100vh;
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                background:linear-gradient(180deg,#5F73F8,#7B4FC4);
+
+            }
+
+            .container{
+
+                width:95%;
+
+                max-width:420px;
+
+                background:#fff;
+
+                padding:35px 28px;
+
+                border-radius:28px;
+
+                text-align:center;
+
+                box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+                animation:fadeIn .5s;
+
+            }
+
+            @keyframes fadeIn{
+
+                from{
+
+                    opacity:0;
+                    transform:translateY(20px);
+
+                }
+
+                to{
+
+                    opacity:1;
+                    transform:translateY(0);
+
+                }
+
+            }
+
+            .logo{
+
+                width:90px;
+                height:90px;
+
+                margin:auto;
+
+                margin-bottom:18px;
+
+                border-radius:50%;
+
+                background:linear-gradient(180deg,#18B84B,#0F9E3D);
+
+                display:flex;
+
+                justify-content:center;
+
+                align-items:center;
+
+                font-size:42px;
+
+                color:#fff;
+
+            }
+
+            h1{
+
+                font-size:30px;
+
+                font-weight:700;
+
+                color:#222;
+
+                margin-bottom:8px;
+
+            }
+
+            .subtitle{
+
+                font-size:16px;
+
+                color:#777;
+
+                margin-bottom:8px;
+
+            }
+
+            .info{
+
+                font-size:15px;
+
+                color:#18B84B;
+
+                font-weight:600;
+
+                margin-bottom:28px;
+
+            }
+
+            .start-btn{
+
+                width:100%;
+
+                padding:17px;
+
+                border:none;
+
+                border-radius:18px;
+
+                background:linear-gradient(90deg,#18B84B,#23CF59);
+
+                color:#fff;
+
+                font-size:22px;
+
+                font-weight:700;
+
+                cursor:pointer;
+
+                transition:.3s;
+
+                box-shadow:0 8px 18px rgba(0,0,0,.15);
+
+            }
+
+            .start-btn:hover{
+
+                transform:translateY(-2px);
+
+            }
+
+            .footer{
+
+                margin-top:20px;
+
+                font-size:13px;
+
+                color:#999;
+
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="logo">
+                📘
+            </div>
+
+            <h1>Computer</h1>
+
+            <p class="subtitle">
+                Part - 1
+            </p>
+
+            <p class="info">
+            মোট ২৫টি প্রশ্ন
+            </p>
+
+            <button
+                class="start-btn"
+                onclick="startQuiz()">
+
+                ▶ Start Quiz
+
+            </button>
+
+            <div class="footer">
+
+                Powered by Quiz App
+
+            </div>
+
+        </div>
+
+        <script>
+
+            /* ==========================
+            Question List
+            ========================== */
+
+            const questions = [
+            
+                {
+                q:"বাংলা ভাষার প্রাচীনতম নিদর্শন কোনটি?",
+                options:[
+                "শ্রীকৃষ্ণকীর্তন",
+                "চর্যাপদ",
+                "গীতাঞ্জলি",
+                "মঙ্গলকাব্য"
+                ],
+                answer:1
+                }
+
+                
+            ];
+            
+            /* ==========================
+            START QUIZ FUNCTION
+            ========================== */
+
+            function startQuiz(){
+
+                /* Save Questions */
+
+                localStorage.setItem(
+                    "quizQuestions",
+                    JSON.stringify(questions)
+                );
+
+                /* Save Topic Name */
+
+                localStorage.setItem(
+                    "quizTitle",
+                    "Part - 1"
+                );
+
+                /* Reset Previous Result */
+
+                localStorage.removeItem("quizScore");
+                localStorage.removeItem("quizWrong");
+                localStorage.removeItem("quizTime");
+
+                /* Open Quiz Page */
+
+                window.location.href =
+                "../Quiz Page.html";
+
+            }
+
+            /* ==========================
+            PAGE LOAD ANIMATION
+            ========================== */
+
+            window.addEventListener("load",function(){
+
+                document.body.style.opacity="0";
+
+                document.body.style.transition=
+                "opacity .5s ease";
+
+                setTimeout(function(){
+
+                    document.body.style.opacity="1";
+
+                },100);
+
+            });
+
+            /* ==========================
+            BUTTON CLICK EFFECT
+            ========================== */
+
+            const btn=
+            document.querySelector(".start-btn");
+
+            btn.addEventListener("click",function(){
+
+                btn.style.transform="scale(.98)";
+
+                setTimeout(function(){
+
+                    btn.style.transform="scale(1)";
+
+                },120);
+
+            });
+
+            /* ==========================
+            END SCRIPT
+            ========================== */
+
+        </script>
+
+    </body>
+
+</html>
